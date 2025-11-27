@@ -313,15 +313,6 @@
         <!-- Header / Hero Imersivo -->
         <header id="home" class="relative min-h-[85vh] flex flex-col items-center justify-center text-center pb-12 pt-20">
             
-            <!-- WALLPAPER DE FUNDO INTEGRADO -->
-            <div class="absolute top-0 left-0 w-full h-full z-[-1] overflow-hidden rounded-b-[3rem]">
-                <!-- Imagem com opacidade reduzida e máscara de gradiente para fade no fundo -->
-                <img src="https://i.postimg.cc/tgsPWwBp/Sem-Titulo-24.jpg" alt="Capa Estação Trap" class="w-full h-full object-cover opacity-60" 
-                     style="mask-image: linear-gradient(to bottom, black 40%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);">
-                <!-- Gradiente extra para garantir fusão perfeita com o fundo preto -->
-                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#00000040] to-[var(--color-bg)]"></div>
-            </div>
-
             <!-- Conteúdo do Header -->
             <div class="relative z-10 mt-10">
                 <h1 class="font-title neon-text-white mb-2 tracking-widest glitch-title text-5xl md:text-7xl" data-text="Estação Trap_019">Estação Trap_019</h1>
@@ -345,7 +336,7 @@
                         
                     </div>
                     <div class="banner-slide">
-                        <img src="https://placehold.co/1000x350/030f29/00ffff?text=Patrocínio+Callidus" alt="Callidus" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                        <img src="https://i.postimg.cc/Bv3sfNgq/patrocinio-callidus.png" alt="Callidus" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
                         
                     </div>
                 </div>
@@ -373,28 +364,15 @@
                         <div class="absolute -top-10 -right-10 w-32 h-32 bg-purple-600 blur-[80px] opacity-40 group-hover:opacity-60 transition duration-500"></div>
                         <div class="flex items-center gap-6 relative z-10">
                             <div class="bg-purple-600/20 p-4 rounded-full border border-purple-500 text-white group-hover:scale-110 transition duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.91 8.84 8.56 2.23a1.93 1.93 0 0 0-1.81 0l-3.91 1.83a1.93 1.93 0 0 0-1.81 2.33l.91 4.12c.11.48-.03.98-.37 1.34l-2.6 2.6c-.46.46-.38 1.25.16 1.6l3.43 2.19c.38.25.59.69.53 1.14l-.6 4.39a1.93 1.93 0 0 0 1.81 2.33h.09c.87 0 1.61-.6 1.77-1.46l.78-4.22c.08-.43.39-.78.81-.9l4.57-1.33a1.93 1.93 0 0 0 1.34-1.86l.5-4.52a1.93 1.93 0 0 0-1.26-1.98z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ticket"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>
                             </div>
                             <div>
                                 <h3 class="text-white font-title text-lg mb-1">Entrada Solidária</h3>
-                                <p class="text-gray-300">1kg de alimento ou R$10</p>
+                                <p class="text-gray-300">1kg de alimento</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-
-             <!-- Playlist -->
-            <section id="playlist" class="py-16 px-4 max-w-4xl mx-auto text-center fade-in border-t border-purple-900/30 scroll-mt-20">
-                <span class="text-purple-400 font-title tracking-[0.3em] mb-4 text-sm border border-purple-600 px-3 py-1 rounded-full inline-block">SOUNDTRACK</span>
-                <h3 class="text-3xl font-title text-white mb-8">Playlist Oficial</h3>
-                <div class="border border-purple-600 rounded-xl overflow-hidden shadow-[0_0_30px_rgba(164,0,255,0.2)] bg-black">
-                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/19Vn0fbpobiwLT7U3CcALp?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-                <a href="https://open.spotify.com/playlist/19Vn0fbpobiwLT7U3CcALp" target="_blank" class="inline-flex items-center gap-2 mt-8 px-8 py-3 bg-[#1DB954] hover:bg-[#1ed760] text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-green-900/50">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.299z"/></svg>
-                    Abrir no Spotify
-                </a>
             </section>
 
             <div class="neon-divider fade-in"></div>
@@ -412,6 +390,19 @@
                 </div>
                 <!-- Dica visual mobile -->
                 <p class="md:hidden text-center text-xs text-gray-600 mt-2 animate-pulse">← Deslize para ver mais →</p>
+            </section>
+
+             <!-- Playlist (Movida para cá) -->
+            <section id="playlist" class="py-16 px-4 max-w-4xl mx-auto text-center fade-in border-t border-purple-900/30 scroll-mt-20">
+                <span class="text-purple-400 font-title tracking-[0.3em] mb-4 text-sm border border-purple-600 px-3 py-1 rounded-full inline-block">SOUNDTRACK</span>
+                <h3 class="text-3xl font-title text-white mb-8">Playlist Oficial</h3>
+                <div class="border border-purple-600 rounded-xl overflow-hidden shadow-[0_0_30px_rgba(164,0,255,0.2)] bg-black">
+                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/19Vn0fbpobiwLT7U3CcALp?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <a href="https://open.spotify.com/playlist/19Vn0fbpobiwLT7U3CcALp" target="_blank" class="inline-flex items-center gap-2 mt-8 px-8 py-3 bg-[#1DB954] hover:bg-[#1ed760] text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-green-900/50">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.299z"/></svg>
+                    Abrir no Spotify
+                </a>
             </section>
 
             <!-- ============================================== -->
@@ -565,8 +556,14 @@
             <p id="modalArtistBio" class="text-gray-300 text-sm leading-relaxed mb-6 px-4"></p>
             
             <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
-                <a id="modalInstaBtn" href="#" target="_blank" class="instagram-button px-6 py-2 rounded-full w-full sm:w-auto text-sm uppercase tracking-wide shadow-lg flex justify-center">Instagram</a>
-                <a id="modalSpotifyBtn" href="#" target="_blank" class="spotify-button px-6 py-2 rounded-full w-full sm:w-auto text-sm uppercase tracking-wide shadow-lg flex justify-center">Spotify</a>
+                <a id="modalInstaBtn" href="#" target="_blank" class="instagram-button px-6 py-2 rounded-full w-full sm:w-auto text-sm uppercase tracking-wide shadow-lg flex items-center justify-center">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    Instagram
+                </a>
+                <a id="modalSpotifyBtn" href="#" target="_blank" class="spotify-button px-6 py-2 rounded-full w-full sm:w-auto text-sm uppercase tracking-wide shadow-lg flex items-center justify-center">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.299z"/></svg>
+                    Spotify
+                </a>
             </div>
         </div>
     </div>
@@ -596,13 +593,6 @@
             <button onclick="toggleHackerMode()" class="border border-green-500 px-6 py-2 text-green-500 hover:bg-green-500 hover:text-black transition uppercase font-bold tracking-widest">Encerrar Sessão</button>
         </div>
     </div>
-
-    <!-- Botão WhatsApp -->
-    <a href="https://wa.me/5519999999999" target="_blank" class="fixed bottom-6 right-6 z-50 hover:scale-110 transition duration-300 group" title="Fale Conosco">
-        <div class="bg-green-600 p-3 rounded-full shadow-[0_0_20px_rgba(22,163,74,0.6)] border border-white/20 group-hover:shadow-[0_0_30px_rgba(22,163,74,0.9)]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-        </div>
-    </a>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -719,10 +709,11 @@
 
             // --- DADOS DOS ARTISTAS ---
             const artists = [
-                { id: 'mnar', name: 'Mnar', handle: '@mnar', img: 'https://i.postimg.cc/8CQRLLxT/mnar-lp.jpg', bio: 'Energia caótica e rimas rápidas. Um dos pilares do trap campineiro.', spotify: '#' },
+                
+                { id: 'mnar', name: 'Mnar', handle: '@mnar_podium', img: 'https://i.postimg.cc/8CQRLLxT/mnar-lp.jpg', bio: 'Energia caótica e rimas rápidas. Um dos pilares do trap campineiro.', spotify: '#' },
                 { id: 'cabarajo', name: 'Cabarajo', handle: '@cabarajo', img: 'https://i.postimg.cc/1zsg9BLH/caba-lp.jpg', bio: 'Trap regional com influências de funk e soul.', spotify: '#' },
-                { id: 'dgr', name: 'DGR', handle: '@dgr', img: 'https://i.postimg.cc/Bvbjx5qf/dgr-lp.jpg', bio: 'O rei do Sad Trap na região 019.', spotify: '#' },
-                { id: 'omg', name: 'OMG Gang', handle: '@omggang', img: 'https://i.postimg.cc/hGTHZ64b/omg-gang-lp.jpg', bio: 'Coletivo pesado que traz a vivência das ruas para o palco.', spotify: '#' },
+                { id: 'dgr', name: 'DGR', handle: '@diretamentedeumguardaroupa', img: 'https://i.postimg.cc/Bvbjx5qf/dgr-lp.jpg', bio: 'O rei do Sad Trap na região 019.', spotify: '#' },
+                { id: 'omg', name: 'OMG Gang', handle: '@_omgang_oficial', img: 'https://i.postimg.cc/hGTHZ64b/omg-gang-lp.jpg', bio: 'Coletivo pesado que traz a vivência das ruas para o palco.', spotify: '#' },
                 { id: 'yuri', name: 'Dj Yuri', handle: '@yuridimc', img: 'https://i.postimg.cc/HkxYKpFZ/dj-yuri-dimc-lp.jpg', bio: 'O melhor do Funk 150BPM misturado com beats de trap.', spotify: '#' },
                 { id: 'agos', name: 'Os Agôs', handle: '@osagos', img: 'https://i.postimg.cc/HkPKmvJN/agos-lp.jpg', bio: 'Ancestralidade e batidas futuristas.', spotify: '#' },
                 { id: 'bs', name: 'Bs Little', handle: '@bslittle', img: 'https://i.postimg.cc/xTLMnXXQ/bs-lp.jpg', bio: 'Plug star em ascensão.', spotify: '#' },
@@ -734,16 +725,16 @@
                 { id: 'a13', name: 'Jerbs', handle: '@jerbs', img: 'https://placehold.co/100/9300e6/000?text=J', bio: 'R&B e Trap.', spotify: '#' },
                 { id: 'a14', name: 'DJ Vitu', handle: '@djvitu', img: 'https://placehold.co/100/7a00ff/000?text=V', bio: 'Underground Hits.', spotify: '#' },
                 { id: 'a15', name: 'Fábrica 808', handle: '@fabrica808', img: 'https://i.postimg.cc/15RsnmmT/fabrica-808-l.jpg', bio: 'Beatmakers.', spotify: '#' },
-                { id: 'a16', name: 'DJ Lavis', handle: '@djlavis', img: 'https://placehold.co/100/4a00e0/fff?text=L', bio: 'Grime e Drill.', spotify: '#' },
-                { id: 'a17', name: 'Sophi', handle: '@sophi', img: 'https://placehold.co/100/8e2de2/fff?text=S', bio: 'Vocal Power.', spotify: '#' },
-                { id: 'a18', name: 'Slin', handle: '@slin', img: 'https://placehold.co/100/000/fff?text=SL', bio: 'Glitchcore.', spotify: '#' },
-                { id: 'a19', name: 'Noisqta', handle: '@noisqta', img: 'https://placehold.co/100/333/fff?text=NQ', bio: 'Cypher Crew.', spotify: '#' },
-                { id: 'a20', name: 'Dj VS', handle: '@djvs', img: 'https://placehold.co/100/111/fff?text=VS', bio: 'Atmosfera.', spotify: '#' },
-                { id: 'a21', name: 'Viniseven', handle: '@viniseven', img: 'https://placehold.co/100/222/fff?text=V7', bio: 'Trap Dinâmico.', spotify: '#' },
+                { id: 'a16', name: 'DJ Lavis', handle: '@djlavis', img: 'https://i.postimg.cc/yYRXRHLn/dj-lavs-lp.jpg', bio: 'Grime e Drill.', spotify: '#' },
+                { id: 'a17', name: 'Sophi', handle: '@sophi', img: 'https://i.postimg.cc/WpHXrSjy/sophi-lp.jpg', bio: 'Vocal Power.', spotify: '#' },
+                { id: 'a18', name: 'Slin', handle: '@slin', img: 'https://i.postimg.cc/0NjsdJm2/slin-lp.png', bio: 'Glitchcore.', spotify: '#' },
+                { id: 'a19', name: 'Noisqta', handle: '@noisqta', img: 'https://i.postimg.cc/SNGR31RQ/nqt-lp.jpg', bio: 'Cypher Crew.', spotify: '#' },
+                { id: 'a20', name: 'Dj VS', handle: '@djvs', img: 'https://i.postimg.cc/0Q9HWNHc/dj-vs-lp.jpg', bio: 'Atmosfera.', spotify: '#' },
+                { id: 'a21', name: 'Viniseven & Gomez', handle: '@viniseven @gomez', img: 'https://placehold.co/100/222/fff?text=V7', bio: 'Trap Dinâmico.', spotify: '#' },
                 { id: 'a22', name: 'Brilho', handle: '@brilho', img: 'https://placehold.co/100/444/fff?text=B', bio: 'Trap Funk.', spotify: '#' },
                 { id: 'a23', name: 'Joana Black', handle: '@joanablack', img: 'https://placehold.co/100/555/fff?text=JB', bio: 'Soul Trap.', spotify: '#' },
-                { id: 'a24', name: 'Lust', handle: '@lust', img: 'https://placehold.co/100/666/fff?text=L', bio: 'Dark Trap.', spotify: '#' },
-                { id: 'a25', name: 'Gomez', handle: '@gomez', img: 'https://placehold.co/100/777/fff?text=G', bio: 'Flow Rápido.', spotify: '#' },
+                { id: 'a24', name: 'Lust', handle: '@lust', img: 'https://i.postimg.cc/ZnX69tjh/lust-lp.jpg', bio: 'Dark Trap.', spotify: '#' },
+                { id: 'a25', name: 'SURPRESA', handle: '???', img: 'https://placehold.co/100/777/fff?text=G', bio: 'Atração secreta a ser revelada.', spotify: '#' },
                 { id: 'a26', name: 'SURPRESA', handle: '???', img: 'https://placehold.co/100/000/fff?text=?', bio: 'Atração secreta a ser revelada.', spotify: '#' }
             ];
 
@@ -765,35 +756,35 @@
             const sponsors = [
                 { 
                     id: 'vereadora', 
-                    name: 'Vereadora', 
-                    logo: 'https://placehold.co/150x150/000/fff?text=Vereadora',
+                    name: 'Vereadora Guida calixto', 
+                    logo: 'https://i.postimg.cc/kGQdBbwS/455342702-382968411493545-5403289661238282040-n.jpg',
                     desc: 'Apoiando a cultura e a juventude da nossa cidade.',
                     gallery: ['https://placehold.co/200x200/222/fff?text=Projeto+Social', 'https://placehold.co/200x200/222/fff?text=Comunidade'],
-                    insta: 'https://instagram.com/vereadora'
+                    insta: 'https://www.instagram.com/guidacalixtopt/'
                 },
                 { 
                     id: 'callidus', 
-                    name: 'Callidus', 
-                    logo: 'https://placehold.co/150x150/000/fff?text=Callidus',
+                    name: 'Callidus WRLD', 
+                    logo: 'https://i.postimg.cc/L6XZFKFF/call.png',
                     desc: 'A Callidus é referência em moda streetwear em Campinas, trazendo peças exclusivas que conectam estilo e atitude urbana.',
-                    gallery: ['https://placehold.co/200x200/222/a400ff?text=Loja+Callidus', 'https://placehold.co/200x200/222/a400ff?text=Camiseta+Exclusiva'],
-                    insta: 'https://instagram.com/callidus'
+                    gallery: ['https://i.postimg.cc/qBjG8YKQ/patrocinio-callidus.png', 'https://i.postimg.cc/jjx5Q8Pc/Quando-NEATH-AND-CALLIDUS-CAP-DROP-Voces-decidem-nos-comentarios-a-data.jpg'],
+                    insta: 'https://www.instagram.com/calliduswrld/'
                 },
                 { 
                     id: 'tigresinhas', 
                     name: 'Tigresinhas', 
-                    logo: 'https://placehold.co/150x150/000/fff?text=Tigresinhas',
+                    logo: 'https://i.postimg.cc/zvTc0kYc/tt.jpg',
                     desc: 'Especialistas em Nail Art e design, as Tigresinhas transformam unhas em obras de arte. Venha conhecer nosso estúdio.',
-                    gallery: ['https://placehold.co/200x200/222/f09433?text=Nail+Art+1', 'https://placehold.co/200x200/222/f09433?text=Estudio+Tigresinhas'],
-                    insta: 'https://instagram.com/tigresinhas'
+                    gallery: ['https://i.postimg.cc/8ccDj988/Gostosas-usam-tigresinhaas-FICHA-TECNICAAcessorios-tigresinhaas-Styling-producao-criativa-(1).jpg', 'https://i.postimg.cc/y8GzbvZN/Se-voce-nao-pegou-o-seu-so-voce-nao-tem-SEO-colar-Hello-Kitty-cravejado-dourado-prata-b.jpg'],
+                    insta: 'https://www.instagram.com/tigresinhaas/'
                 },
                 { 
                     id: 'dommarco', 
-                    name: 'Dom Marco', 
-                    logo: 'https://placehold.co/150x150/000/fff?text=Dom+Marco',
+                    name: 'Barbeari Dom Marco', 
+                    logo: 'https://i.postimg.cc/zvTc0kYc/tt.jpg',
                     desc: 'Barbearia clássica com toque moderno. Cortes, barba e aquele ambiente resenha que você respeita.',
-                    gallery: ['https://placehold.co/200x200/222/fff?text=Corte+Degrade', 'https://placehold.co/200x200/222/fff?text=Ambiente'],
-                    insta: 'https://instagram.com/dommarco'
+                    gallery: ['https://i.postimg.cc/HWM4cx24/542932274-18056156477617787-5949519189802782757-n.jpg', 'https://i.postimg.cc/76272sgY/Mais-um-Profissional-na-Equipe-Dom-Marco-Seja-Muito-Bem-Vindo-danilo-cavalcant-Que-pos.jpg'],
+                    insta: 'https://www.instagram.com/barbearia_dommarco/'
                 }
             ];
 
