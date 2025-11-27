@@ -41,7 +41,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
     <!-- Leaflet.js CSS (Mapa) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -56,29 +56,57 @@
             --font-title: 'Orbitron', sans-serif;
             --font-text: 'Exo 2', sans-serif;
             --font-text-color: #E3E3E3;
+            --glow-spread: 10px;
         }
+
+        /* --- CUSTOM SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0b0f; }
+        ::-webkit-scrollbar-thumb { background: var(--color-purple-dark); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-purple-neon); }
+
+        /* --- MODO HACKER (OVERRIDE) --- */
+        body.hacker-mode {
+            --color-purple-neon: #00ff00 !important; /* Verde Matrix */
+            --color-purple-dark: #004400 !important;
+            --font-title: 'Share Tech Mono', monospace !important;
+            --font-text: 'Share Tech Mono', monospace !important;
+            --font-text-color: #00ff00 !important;
+        }
+        
+        body.hacker-mode .text-purple-400, 
+        body.hacker-mode .text-purple-600 { color: #00ff00 !important; }
+        
+        body.hacker-mode .border-purple-600,
+        body.hacker-mode .border-purple-500,
+        body.hacker-mode .border-purple-900 { border-color: #00ff00 !important; }
+
+        body.hacker-mode .bg-purple-600 { background-color: #00ff00 !important; color: black !important; }
+        
+        body.hacker-mode img { filter: grayscale(100%) contrast(1.2) brightness(0.8) sepia(100%) hue-rotate(50deg) saturate(5); }
+
+        body.hacker-mode .neon-text { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+        body.hacker-mode .neon-text-white { color: #ccffcc; text-shadow: 0 0 5px #00ff00; }
+
+        /* ---------------------------- */
 
         html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--color-bg);
-            /* A imagem de fundo foi movida para body::before para corrigir bugs no mobile */
             color: var(--font-text-color);
             font-family: var(--font-text);
             overflow-x: hidden;
             letter-spacing: 0.5px;
             position: relative;
+            transition: all 0.5s ease;
         }
 
-        /* CORREÇÃO DE FUNDO MOBILE: Usamos um pseudo-elemento fixo */
+        /* CORREÇÃO DE FUNDO MOBILE */
         body::before {
             content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -10; /* Atrás das estrelas */
+            top: 0; left: 0; width: 100%; height: 100%; z-index: -10; 
             background-image: 
                 linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)),
                 url(https://www.transparenttextures.com/patterns/noise.png),
@@ -87,6 +115,12 @@
             background-blend-mode: multiply, normal, multiply, normal;
             background-size: auto, auto, auto, cover;
             pointer-events: none;
+            transition: filter 0.5s ease;
+        }
+        
+        body.hacker-mode::before {
+             background-image: linear-gradient(to bottom, rgba(0, 20, 0, 0.9), rgba(0, 0, 0, 1)), url(https://www.transparenttextures.com/patterns/binary.png);
+             filter: hue-rotate(90deg) contrast(1.5);
         }
 
         /* Tipografia */
@@ -95,159 +129,184 @@
         @media (max-width: 768px) { h1 { font-size: 2.0rem; } }
 
         /* Neon & Efeitos */
-        .neon-text {
-            color: var(--color-purple-neon);
-            text-shadow: 0 0 5px var(--color-purple-neon), 0 0 10px var(--color-purple-neon), 0 0 20px var(--color-purple-dark);
-        }
-        .neon-text-white {
-            color: #fff;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px var(--color-purple-neon);
-        }
+        .neon-text { color: var(--color-purple-neon); text-shadow: 0 0 5px var(--color-purple-neon), 0 0 10px var(--color-purple-neon), 0 0 20px var(--color-purple-dark); }
+        .neon-text-white { color: #fff; text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px var(--color-purple-neon); }
+
         .neon-border-button {
-            border: 1px solid var(--color-purple-neon);
-            color: var(--color-purple-neon);
-            text-shadow: 0 0 5px var(--color-purple-neon);
-            transition: all 0.3s ease;
+            border: 1px solid var(--color-purple-neon); color: var(--color-purple-neon); text-shadow: 0 0 5px var(--color-purple-neon); transition: all 0.3s ease;
         }
         .neon-border-button:hover {
-            color: var(--color-bg);
-            background-color: var(--color-purple-neon);
-            box-shadow: 0 0 10px var(--color-purple-neon), 0 0 20px var(--color-purple-neon);
+            color: var(--color-bg); background-color: var(--color-purple-neon); box-shadow: 0 0 10px var(--color-purple-neon), 0 0 20px var(--color-purple-neon); transform: translateY(-2px);
         }
         
+        /* Links de Navegação Ativos */
+        .nav-link.active {
+            color: var(--color-purple-neon);
+            text-shadow: 0 0 8px var(--color-purple-neon);
+        }
+
         /* Botões Sociais */
         .spotify-button {
-            background-color: var(--color-green-spotify);
-            color: white; border: none; font-weight: bold;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            background-color: var(--color-green-spotify); color: white; border: none; font-weight: bold;
+            display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .spotify-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--color-green-spotify);
-        }
+        .spotify-button:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 20px -5px rgba(29, 185, 84, 0.4); }
 
         .instagram-button {
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white; border: none; font-weight: bold;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            color: white; border: none; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .instagram-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #dc2743;
-        }
+        .instagram-button:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 20px -5px rgba(220, 39, 67, 0.4); }
         
         .neon-divider {
-            height: 2px; width: 100%; background-color: var(--color-purple-neon);
-            box-shadow: 0 0 10px var(--color-purple-neon); opacity: 0.5; margin: 4rem 0;
+            height: 2px; width: 100%; background-color: var(--color-purple-neon); box-shadow: 0 0 10px var(--color-purple-neon); opacity: 0.5; margin: 4rem 0;
         }
 
         /* Estrelas Background */
         @keyframes move-stars { 0% { transform: translateY(0); } 100% { transform: translateY(-100vh); } }
-        .stars {
-            position: fixed; top: 0; left: 0; width: 100%; height: 200vh;
-            background: transparent; z-index: -1; opacity: 0.7;
-            animation: move-stars 50s linear infinite;
-        }
-        .stars-bg {
-            width: 1px; height: 1px; background: #FFF;
-            box-shadow: 50vw 30vh 1px 1px #FFF, 10vw 80vh 0px 0px #FFF, 80vw 50vh 1px 0px #FFF, 25vw 10vh 0px 1px #FFF, 65vw 90vh 1px 1px #FFF;
-        }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 200vh; background: transparent; z-index: -1; opacity: 0.7; animation: move-stars 50s linear infinite; }
+        .stars-bg { width: 1px; height: 1px; background: #FFF; box-shadow: 50vw 30vh 1px 1px #FFF, 10vw 80vh 0px 0px #FFF, 80vw 50vh 1px 0px #FFF, 25vw 10vh 0px 1px #FFF, 65vw 90vh 1px 1px #FFF; }
 
         /* Glitch Title */
         @keyframes glitch {
           0% { text-shadow: 0.05em 0 0 rgba(164, 0, 255, 0.75), -0.05em -0.025em 0 rgba(0, 255, 255, 0.75); }
-          14% { text-shadow: 0.05em 0 0 rgba(164, 0, 255, 0.75), -0.05em -0.025em 0 rgba(0, 255, 255, 0.75); }
           15% { text-shadow: -0.05em -0.025em 0 rgba(164, 0, 255, 0.75), 0.025em 0.025em 0 rgba(0, 255, 255, 0.75); }
-          49% { text-shadow: -0.05em -0.025em 0 rgba(164, 0, 255, 0.75), 0.025em 0.025em 0 rgba(0, 255, 255, 0.75); }
           50% { text-shadow: 0.025em 0.05em 0 rgba(164, 0, 255, 0.75), 0.05em 0 0 rgba(0, 255, 255, 0.75); }
-          99% { text-shadow: 0.025em 0.05em 0 rgba(164, 0, 255, 0.75), 0.05em 0 0 rgba(0, 255, 255, 0.75); }
           100% { text-shadow: -0.025em 0 0 rgba(164, 0, 255, 0.75), -0.025em -0.025em 0 rgba(0, 255, 255, 0.75); }
         }
         .glitch-title { position: relative; animation: glitch 500ms infinite; }
 
         /* Carousel Banners */
-        .banner-carousel {
-            position: relative; width: 100%; max-width: 1000px; height: 350px; margin: 2rem auto; overflow: hidden; border-radius: 8px; border: 1px solid rgba(164, 0, 255, 0.3);
-        }
-        .banner-slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; align-items: center; justify-content: center;
-        }
+        .banner-carousel { position: relative; width: 100%; max-width: 1000px; height: 350px; margin: 2rem auto; overflow: hidden; border-radius: 8px; border: 1px solid rgba(164, 0, 255, 0.3); }
+        .banner-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; align-items: center; justify-content: center; }
         .banner-slide.active { opacity: 1; }
-        .banner-content {
-            background: rgba(0,0,0,0.6); padding: 10px 20px; border-radius: 4px; border: 1px solid var(--color-purple-neon); position: relative; z-index: 10;
-        }
+        .banner-content { background: rgba(0,0,0,0.6); padding: 10px 20px; border-radius: 4px; border: 1px solid var(--color-purple-neon); position: relative; z-index: 10; }
 
         /* Cards */
-        .artist-card {
-            background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(164, 0, 255, 0.2); padding: 1rem; text-align: center; border-radius: 0.5rem; transition: all 0.3s ease; flex-shrink: 0;
-        }
-        .artist-card:hover { transform: translateY(-8px); background-color: rgba(164, 0, 255, 0.05); border-color: var(--color-purple-neon); }
-        .artist-card img {
-            width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-purple-neon); margin: 0 auto 0.75rem auto; transition: all 0.3s ease; filter: grayscale(30%);
-        }
-        .artist-card:hover img { filter: grayscale(0%); box-shadow: 0 0 15px var(--color-purple-neon); }
+        .artist-card { background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(164, 0, 255, 0.2); padding: 1rem; text-align: center; border-radius: 0.5rem; transition: all 0.3s ease; flex-shrink: 0; cursor: pointer; }
+        .artist-card:hover { transform: translateY(-8px); background-color: rgba(164, 0, 255, 0.05); border-color: var(--color-purple-neon); box-shadow: 0 4px 20px rgba(164, 0, 255, 0.15); }
+        .artist-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-purple-neon); margin: 0 auto 0.75rem auto; transition: all 0.3s ease; filter: grayscale(30%); }
+        .artist-card:hover img { filter: grayscale(0%); box-shadow: 0 0 15px var(--color-purple-neon); transform: scale(1.05); }
         
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-        .open-modal-btn {
-            font-family: var(--font-text); font-size: 0.75rem; font-weight: 600; color: var(--color-purple-neon); background: transparent; border: 1px solid var(--color-purple-neon); padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-top: 0.75rem; cursor: pointer; transition: all 0.3s ease;
-        }
+        .open-modal-btn { font-family: var(--font-text); font-size: 0.75rem; font-weight: 600; color: var(--color-purple-neon); background: transparent; border: 1px solid var(--color-purple-neon); padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-top: 0.75rem; cursor: pointer; transition: all 0.3s ease; }
         .open-modal-btn:hover { background: var(--color-purple-neon); color: var(--color-bg); }
 
         /* Modais */
-        .modal-overlay {
-            position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease;
-        }
+        .modal-overlay { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
         .modal-overlay.open { opacity: 1; visibility: visible; }
-        .modal-content {
-            background-color: #0b0b0f; background-image: url(https://www.transparenttextures.com/patterns/noise.png); color: #e5e5e5; border-radius: 1rem; padding: 2.5rem; width: 90%; max-width: 450px; border: 1px solid #9c3cff; box-shadow: 0 0 30px rgba(156, 60, 255, 0.3); position: relative; transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center;
-        }
+        .modal-content { background-color: #0b0b0f; background-image: url(https://www.transparenttextures.com/patterns/noise.png); color: #e5e5e5; border-radius: 1rem; padding: 2.5rem; width: 90%; max-width: 450px; border: 1px solid #9c3cff; box-shadow: 0 0 30px rgba(156, 60, 255, 0.3); position: relative; transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; }
         .modal-overlay.open .modal-content { transform: scale(1); }
-        .modal-close-btn { position: absolute; top: 1rem; right: 1rem; color: #aaa; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; }
-        .modal-close-btn:hover { color: white; }
+        .modal-close-btn { position: absolute; top: 1rem; right: 1rem; color: #aaa; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; transition: color 0.2s; }
+        .modal-close-btn:hover { color: white; transform: rotate(90deg); }
 
         /* Animações */
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in-visible { opacity: 1; transform: translateY(0); }
         
         /* Ajuste do Mapa */
-        #map { height: 300px; width: 100%; border-radius: 0.5rem; border: 2px solid var(--color-purple-neon); box-shadow: 0 0 15px var(--color-purple-neon); z-index: 10; }
+        #map { height: 300px; width: 100%; border-radius: 0.5rem; border: 2px solid var(--color-purple-neon); box-shadow: 0 0 15px var(--color-purple-neon); z-index: 10; filter: grayscale(100%) invert(100%) hue-rotate(240deg) brightness(0.9) contrast(1.1); transition: filter 0.3s; }
+        #map:hover { filter: grayscale(100%) invert(100%) hue-rotate(240deg) brightness(1) contrast(1.2); }
         @media (min-width: 768px) { #map { height: 400px; } }
         .leaflet-container { background: #000 !important; }
-        .leaflet-tile { filter: grayscale(100%) invert(100%) hue-rotate(240deg) brightness(0.8) contrast(1.2) !important; }
+
+        /* TOAST NOTIFICATION */
+        #toast-container {
+            position: fixed; top: 20px; right: 20px; z-index: 200; pointer-events: none;
+        }
+        .toast {
+            background: rgba(0, 0, 0, 0.9); border: 1px solid var(--color-purple-neon); color: white;
+            padding: 12px 24px; margin-bottom: 10px; border-radius: 8px;
+            box-shadow: 0 0 15px rgba(164, 0, 255, 0.3); font-family: var(--font-text); font-size: 0.9rem;
+            display: flex; align-items: center; gap: 10px;
+            opacity: 0; transform: translateX(50px); transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: auto;
+        }
+        .toast.show { opacity: 1; transform: translateX(0); }
+        .toast-icon { color: var(--color-purple-neon); font-size: 1.2rem; }
+
+        /* SCROLL TO TOP BTN */
+        #scrollTopBtn {
+            position: fixed; bottom: 90px; right: 20px; z-index: 90;
+            background: rgba(0,0,0,0.8); border: 1px solid var(--color-purple-neon); color: var(--color-purple-neon);
+            width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; pointer-events: none; transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(164, 0, 255, 0.2);
+        }
+        #scrollTopBtn.visible { opacity: 1; pointer-events: auto; }
+        #scrollTopBtn:hover { background: var(--color-purple-neon); color: black; transform: translateY(-3px); }
+        @media (min-width: 768px) { #scrollTopBtn { bottom: 30px; } } /* Desktop fica mais embaixo */
+        
+        /* SHAKE ANIMATION (Oracle) */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        .shake-active { animation: shake 0.5s; }
+
     </style>
 </head>
 <body class="relative">
 
     <!-- Navegação -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md shadow-lg shadow-purple-neon/10 border-b border-purple-900/30">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md shadow-lg shadow-purple-neon/10 border-b border-purple-900/30 transition-all duration-300" id="navbar">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex justify-between items-center h-16">
-                <a href="#home" class="font-title text-lg font-bold neon-text-white tracking-wider">Estação Trap_019</a>
+                <!-- LOGO COM GATILHO DE HACKER MODE -->
+                <a href="#home" id="brand-logo" class="font-title text-lg font-bold neon-text-white tracking-wider select-none cursor-pointer hover:text-purple-400 transition-colors">Estação Trap_019</a>
+                
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="#about" class="font-title text-sm uppercase tracking-wider text-gray-300 hover:neon-text transition">Sobre</a>
-                    <a href="#playlist" class="font-title text-sm uppercase tracking-wider text-gray-300 hover:neon-text transition">Playlist</a>
-                    <a href="#lineup" class="font-title text-sm uppercase tracking-wider text-gray-300 hover:neon-text transition">Line-up</a>
-                    <a href="#map-location" class="font-title text-sm uppercase tracking-wider text-gray-300 hover:neon-text transition">Local</a>
+                    <a href="#about" class="nav-link font-title text-sm uppercase tracking-wider text-gray-300 hover:text-white transition relative group">
+                        Sobre
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#playlist" class="nav-link font-title text-sm uppercase tracking-wider text-gray-300 hover:text-white transition relative group">
+                        Playlist
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#lineup" class="nav-link font-title text-sm uppercase tracking-wider text-gray-300 hover:text-white transition relative group">
+                        Line-up
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#map-location" class="nav-link font-title text-sm uppercase tracking-wider text-gray-300 hover:text-white transition relative group">
+                        Local
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
                 </div>
-                <button id="mobile-menu-button" class="md:hidden text-white p-2">
+                <button id="mobile-menu-button" class="md:hidden text-white p-2 hover:text-purple-400 transition">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="md:hidden hidden bg-black/95 pb-4 border-b border-purple-900">
-            <a href="#about" class="block font-title text-sm text-center text-gray-300 py-3 border-b border-gray-800">Sobre</a>
-            <a href="#playlist" class="block font-title text-sm text-center text-gray-300 py-3 border-b border-gray-800">Playlist</a>
-            <a href="#lineup" class="block font-title text-sm text-center text-gray-300 py-3 border-b border-gray-800">Line-up</a>
-            <a href="#map-location" class="block font-title text-sm text-center text-gray-300 py-3">Local</a>
+        <div id="mobile-menu" class="md:hidden hidden bg-black/95 pb-4 border-b border-purple-900 origin-top transform transition-transform duration-300">
+            <a href="#about" class="block font-title text-sm text-center text-gray-300 py-3 border-b border-gray-800 hover:bg-gray-900 hover:text-white transition">Sobre</a>
+            <a href="#playlist" class="block font-title text-sm text-center text-gray-300 py-3 border-b border-gray-800 hover:bg-gray-900 hover:text-white transition">Playlist</a>
+            <a href="#lineup" class="block font-title text-sm text-center text-gray-300 py-3 border-b border-gray-800 hover:bg-gray-900 hover:text-white transition">Line-up</a>
+            <a href="#map-location" class="block font-title text-sm text-center text-gray-300 py-3 hover:bg-gray-900 hover:text-white transition">Local</a>
         </div>
     </nav>
 
     <!-- Fundo Estrelado -->
     <div class="stars"><div class="stars-bg"></div></div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Scroll Top Button -->
+    <button id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao topo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
 
     <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -269,32 +328,31 @@
                 <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-lg mx-auto drop-shadow-lg"><span class="neon-text font-semibold">★</span> O evento que conecta o underground ao universo.</p>
 
                 <!-- Countdown -->
-                <div id="countdown" class="flex flex-wrap justify-center gap-3 mb-10 fade-in">
-                    <div class="text-center bg-black/70 border border-purple-600 p-2 rounded min-w-[70px] backdrop-blur-sm"><span id="days" class="block text-2xl font-title text-white">00</span><span class="text-[10px] text-purple-400 uppercase">Dias</span></div>
-                    <div class="text-center bg-black/70 border border-purple-600 p-2 rounded min-w-[70px] backdrop-blur-sm"><span id="hours" class="block text-2xl font-title text-white">00</span><span class="text-[10px] text-purple-400 uppercase">Hs</span></div>
-                    <div class="text-center bg-black/70 border border-purple-600 p-2 rounded min-w-[70px] backdrop-blur-sm"><span id="minutes" class="block text-2xl font-title text-white">00</span><span class="text-[10px] text-purple-400 uppercase">Min</span></div>
-                    <div class="text-center bg-black/70 border border-purple-600 p-2 rounded min-w-[70px] backdrop-blur-sm"><span id="seconds" class="block text-2xl font-title text-white">00</span><span class="text-[10px] text-purple-400 uppercase">Seg</span></div>
+                <div id="countdown" class="flex flex-wrap justify-center gap-3 mb-10 fade-in select-none cursor-default">
+                    <div class="text-center bg-black/70 border border-purple-600 p-2 rounded min-w-[70px] backdrop-blur-sm group hover:border-purple-400 transition"><span id="days" class="block text-2xl font-title text-white group-hover:text-purple-300 transition">00</span><span class="text-[10px] text-purple-400 uppercase">Dias</span></div>
+                    <div class="text-center bg-black/70 border border-purple-600 p-2 rounded min-w-[70px] backdrop-blur-sm group hover:border-purple-400 transition"><span id="hours" class="block text-2xl font-title text-white group-hover:text-purple-300 transition">00</span><span class="text-[10px] text-purple-400 uppercase">Hs</span></div>
+                    <div class="text-center bg-black/70 border border-purple-600 p-2 rounded min-w-[70px] backdrop-blur-sm group hover:border-purple-400 transition"><span id="minutes" class="block text-2xl font-title text-white group-hover:text-purple-300 transition">00</span><span class="text-[10px] text-purple-400 uppercase">Min</span></div>
+                    <div class="text-center bg-black/70 border border-purple-600 p-2 rounded min-w-[70px] backdrop-blur-sm group hover:border-purple-400 transition"><span id="seconds" class="block text-2xl font-title text-white group-hover:text-purple-300 transition">00</span><span class="text-[10px] text-purple-400 uppercase">Seg</span></div>
                 </div>
 
                 <!-- BANNERS ROTATIVOS -->
-                <div class="banner-carousel fade-in shadow-lg shadow-purple-900/20">
+                <div class="banner-carousel fade-in shadow-lg shadow-purple-900/20 group">
                     <div class="banner-slide active">
-                        <img src="https://placehold.co/1000x350/1a0329/a400ff?text=Ingressos+Lote+Virada" alt="Ingressos" class="absolute inset-0 w-full h-full object-cover">
-                        <div class="banner-content"><h3 class="font-title text-white text-xl">Garanta seu ingresso</h3></div>
+                        <img src="https://i.postimg.cc/tgsPWwBp/Sem-Titulo-24.jpg" alt="Ingressos" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
                     </div>
                     <div class="banner-slide">
-                        <img src="https://placehold.co/1000x350/29031a/f000ff?text=Camisetas+Oficiais" alt="Camisetas" class="absolute inset-0 w-full h-full object-cover">
-                        <div class="banner-content"><h3 class="font-title text-white text-xl">Merch Exclusivo</h3></div>
+                        <img src="https://i.postimg.cc/rwydT3W8/Se-voce-nao-pegou-o-seu-so-voce-nao-tem-SEO-colar-Hello-Kitty-cravejado-dourado-prata-b.jpg" alt="Camisetas" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                        
                     </div>
                     <div class="banner-slide">
-                        <img src="https://placehold.co/1000x350/030f29/00ffff?text=Patrocínio+Callidus" alt="Callidus" class="absolute inset-0 w-full h-full object-cover">
-                        <div class="banner-content"><h3 class="font-title text-white text-xl">Apoio: Callidus</h3></div>
+                        <img src="https://placehold.co/1000x350/030f29/00ffff?text=Patrocínio+Callidus" alt="Callidus" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                        
                     </div>
                 </div>
 
                 <nav class="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
                     <a href="#about" class="font-title text-sm uppercase px-8 py-3 rounded neon-border-button tracking-wider font-bold bg-black/50 backdrop-blur-sm">Entrar no universo</a>
-                    <a href="#playlist" class="spotify-button px-8 py-3 rounded font-title text-sm uppercase tracking-wider shadow-lg">
+                    <a href="#playlist" class="spotify-button px-8 py-3 rounded-full font-title text-sm uppercase tracking-wider shadow-lg">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.299z"/></svg>
                         Ouça a Playlist
                     </a>
@@ -304,17 +362,17 @@
 
         <main>
             <!-- About -->
-            <section id="about" class="py-20 fade-in border-t border-purple-900/30">
+            <section id="about" class="py-20 fade-in border-t border-purple-900/30 scroll-mt-20">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div class="flex flex-col items-start text-left">
                         <span class="text-purple-400 font-title tracking-[0.3em] mb-2 text-sm border border-purple-600 px-3 py-1 rounded-full">SOBRE</span>
                         <h2 class="text-2xl md:text-3xl font-title mb-4 neon-text-white leading-tight">A FUSÃO DE TRAP,<br> ARTE E LIFESTYLE</h2>
                         <p class="text-gray-400 text-lg leading-relaxed">Estação Trap_019: a fusão de trap, arte e lifestyle de rua. Onde som, asfalto e energia se encontram para criar uma experiência única em Campinas.</p>
                     </div>
-                    <div class="bg-gradient-to-br from-purple-900/20 to-black border border-purple-600/50 p-8 rounded-2xl backdrop-blur-sm relative overflow-hidden group hover:border-purple-500 transition-colors">
-                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-purple-600 blur-[80px] opacity-40 group-hover:opacity-60 transition"></div>
+                    <div class="bg-gradient-to-br from-purple-900/20 to-black border border-purple-600/50 p-8 rounded-2xl backdrop-blur-sm relative overflow-hidden group hover:border-purple-500 transition-colors duration-500 cursor-default">
+                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-purple-600 blur-[80px] opacity-40 group-hover:opacity-60 transition duration-500"></div>
                         <div class="flex items-center gap-6 relative z-10">
-                            <div class="bg-purple-600/20 p-4 rounded-full border border-purple-500 text-white">
+                            <div class="bg-purple-600/20 p-4 rounded-full border border-purple-500 text-white group-hover:scale-110 transition duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.91 8.84 8.56 2.23a1.93 1.93 0 0 0-1.81 0l-3.91 1.83a1.93 1.93 0 0 0-1.81 2.33l.91 4.12c.11.48-.03.98-.37 1.34l-2.6 2.6c-.46.46-.38 1.25.16 1.6l3.43 2.19c.38.25.59.69.53 1.14l-.6 4.39a1.93 1.93 0 0 0 1.81 2.33h.09c.87 0 1.61-.6 1.77-1.46l.78-4.22c.08-.43.39-.78.81-.9l4.57-1.33a1.93 1.93 0 0 0 1.34-1.86l.5-4.52a1.93 1.93 0 0 0-1.26-1.98z"/></svg>
                             </div>
                             <div>
@@ -327,13 +385,13 @@
             </section>
 
              <!-- Playlist -->
-            <section id="playlist" class="py-16 px-4 max-w-4xl mx-auto text-center fade-in border-t border-purple-900/30">
+            <section id="playlist" class="py-16 px-4 max-w-4xl mx-auto text-center fade-in border-t border-purple-900/30 scroll-mt-20">
                 <span class="text-purple-400 font-title tracking-[0.3em] mb-4 text-sm border border-purple-600 px-3 py-1 rounded-full inline-block">SOUNDTRACK</span>
                 <h3 class="text-3xl font-title text-white mb-8">Playlist Oficial</h3>
                 <div class="border border-purple-600 rounded-xl overflow-hidden shadow-[0_0_30px_rgba(164,0,255,0.2)] bg-black">
-                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX0XUfTFmIBR7?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/19Vn0fbpobiwLT7U3CcALp?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </div>
-                <a href="https://open.spotify.com/playlist/37i9dQZF1DX0XUfTFmIBR7" target="_blank" class="inline-flex items-center gap-2 mt-8 px-8 py-3 bg-[#1DB954] hover:bg-[#1ed760] text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-green-900/50">
+                <a href="https://open.spotify.com/playlist/19Vn0fbpobiwLT7U3CcALp" target="_blank" class="inline-flex items-center gap-2 mt-8 px-8 py-3 bg-[#1DB954] hover:bg-[#1ed760] text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-green-900/50">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.299z"/></svg>
                     Abrir no Spotify
                 </a>
@@ -342,28 +400,73 @@
             <div class="neon-divider fade-in"></div>
 
             <!-- Line-up -->
-            <section id="lineup" class="py-20 fade-in">
+            <section id="lineup" class="py-20 fade-in scroll-mt-20">
                 <div class="text-center mb-12">
                     <span class="text-purple-400 font-title tracking-[0.3em] text-sm border border-purple-600 px-3 py-1 rounded-full">LINE-UP</span>
                     <h2 class="text-3xl md:text-4xl font-title mt-4 neon-text-white">26 ARTISTAS CONFIRMADOS</h2>
                 </div>
                 
-                <!-- Grid de Artistas - Responsivo (Esteira no mobile) -->
-                <div id="grid-artistas" class="flex overflow-x-auto snap-x snap-mandatory gap-4 py-4 px-4 md:px-0 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:gap-6 scrollbar-hide">
+                <!-- Grid de Artistas -->
+                <div id="grid-artistas" class="flex overflow-x-auto snap-x snap-mandatory gap-4 py-4 px-4 md:px-0 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:gap-6 scrollbar-hide pb-4">
                     <!-- Cards gerados via JS -->
                 </div>
+                <!-- Dica visual mobile -->
+                <p class="md:hidden text-center text-xs text-gray-600 mt-2 animate-pulse">← Deslize para ver mais →</p>
             </section>
+
+            <!-- ============================================== -->
+            <!-- SEÇÃO: O ORÁCULO DO TRAP (IMERSÃO) -->
+            <!-- ============================================== -->
+            <section id="oracle" class="py-24 relative overflow-hidden border-t border-purple-900/30">
+                <!-- Fundo animado local -->
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30"></div>
+                
+                <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+                    <span class="text-purple-400 font-title tracking-[0.3em] text-xs uppercase mb-4 block">SINTONIA CÓSMICA</span>
+                    <h2 class="text-3xl md:text-5xl font-title neon-text-white mb-8">O ORÁCULO 019</h2>
+                    <p class="text-gray-400 mb-12">O universo tem uma mensagem para o seu corre de hoje. Clique no núcleo para receber a visão.</p>
+
+                    <!-- O Núcleo Interativo -->
+                    <div id="oracleCore" class="relative w-48 h-48 mx-auto mb-12 cursor-pointer group transition-transform duration-500 hover:scale-105" onclick="revealFate()">
+                        <!-- Camadas de brilho -->
+                        <div class="absolute inset-0 bg-purple-600 rounded-full blur-[50px] opacity-40 group-hover:opacity-70 animate-pulse"></div>
+                        <div class="absolute inset-0 bg-gradient-to-tr from-purple-900 to-black rounded-full border-4 border-purple-500 shadow-[0_0_50px_#a400ff] flex items-center justify-center overflow-hidden">
+                            <span class="text-6xl group-hover:animate-spin transition-transform duration-700">🔮</span>
+                        </div>
+                    </div>
+
+                    <!-- Área do Resultado (Oculta inicialmente) -->
+                    <div id="oracleResult" class="hidden opacity-0 transform translate-y-4 transition-all duration-700">
+                        <div class="bg-black/80 border border-purple-500 p-8 rounded-2xl relative shadow-[0_0_30px_rgba(164,0,255,0.15)] mx-auto max-w-lg">
+                            <div class="text-4xl text-purple-500 absolute -top-4 -left-2 font-serif">"</div>
+                            <p id="oracleText" class="text-xl md:text-2xl text-white font-title italic leading-relaxed mb-4">
+                                <!-- Frase aqui -->
+                            </p>
+                            <div class="text-4xl text-purple-500 absolute -bottom-8 -right-2 font-serif">"</div>
+                            
+                            <div class="border-t border-gray-800 pt-4 mt-6 flex justify-between items-center">
+                                <span id="oracleArtist" class="text-purple-400 font-bold uppercase tracking-wider text-sm"></span>
+                                <span class="text-gray-500 text-xs">#EstacaoTrap019</span>
+                            </div>
+                        </div>
+                        
+                        <button class="mt-8 text-gray-400 text-sm underline hover:text-white transition" onclick="revealFate()">Pedir outra visão</button>
+                    </div>
+                </div>
+            </section>
+            <!-- FIM SEÇÃO ORÁCULO -->
 
             <div class="neon-divider fade-in"></div>
 
             <!-- Mapa -->
-            <section id="map-location" class="py-20 text-center fade-in">
+            <section id="map-location" class="py-20 text-center fade-in scroll-mt-20">
                 <div class="text-center mb-10">
                     <span class="text-purple-400 font-title tracking-[0.3em] text-sm border border-purple-600 px-3 py-1 rounded-full">LOCALIZAÇÃO</span>
                     <h2 class="text-3xl md:text-4xl font-title mt-4 mb-4 neon-text-white">PONTO DE ENCONTRO</h2>
                     <p class="text-lg text-gray-300">Estação Cultura - Praça Mal. Floriano Peixoto, Campinas - SP</p>
                 </div>
                 <div id="map"></div>
+                <a href="https://maps.google.com/?q=Estação+Cultura+Campinas" target="_blank" class="inline-block mt-6 text-purple-400 hover:text-white underline text-sm">Abrir no Google Maps</a>
             </section>
 
             <!-- FAQ -->
@@ -372,13 +475,47 @@
                     <h2 class="text-3xl font-title neon-text-white">PERGUNTAS FREQUENTES</h2>
                 </div>
                 <div class="max-w-3xl mx-auto space-y-4">
-                    <details class="faq-item group">
-                        <summary class="faq-question bg-purple-900/10 rounded-t group-open:rounded-t-lg group-open:bg-purple-900/30 transition">Qual a classificação etária?</summary>
-                        <div class="faq-answer bg-purple-900/5 rounded-b"><p>18 anos. Obrigatória apresentação de documento.</p></div>
+                    <details class="faq-item group cursor-pointer">
+                        <summary class="faq-question bg-purple-900/10 rounded-t p-4 font-bold text-gray-200 group-open:rounded-t-lg group-open:bg-purple-900/30 transition hover:bg-purple-900/20 list-none flex justify-between items-center">
+                            Qual a classificação etária?
+                            <span class="transform group-open:rotate-180 transition">▼</span>
+                        </summary>
+                        <div class="faq-answer bg-purple-900/5 p-4 rounded-b border border-t-0 border-purple-900/20"><p class="text-gray-400">18 anos. Obrigatória apresentação de documento original com foto.</p></div>
                     </details>
-                    <details class="faq-item group">
-                        <summary class="faq-question bg-purple-900/10 rounded-t group-open:rounded-t-lg group-open:bg-purple-900/30 transition">O que posso levar?</summary>
-                        <div class="faq-answer bg-purple-900/5 rounded-b"><p>Não é permitida a entrada de bebidas, comidas ou objetos cortantes.</p></div>
+                    <details class="faq-item group cursor-pointer">
+                        <summary class="faq-question bg-purple-900/10 rounded-t p-4 font-bold text-gray-200 group-open:rounded-t-lg group-open:bg-purple-900/30 transition hover:bg-purple-900/20 list-none flex justify-between items-center">
+                            O que posso levar?
+                            <span class="transform group-open:rotate-180 transition">▼</span>
+                        </summary>
+                        <div class="faq-answer bg-purple-900/5 p-4 rounded-b border border-t-0 border-purple-900/20"><p class="text-gray-400">Permitido: Copo não rígido (plástico mole), capa de chuva, carregador portátil. <br>Proibido: Bebidas, comidas, objetos cortantes, guarda-chuva.</p></div>
+                    </details>
+                    <details class="faq-item group cursor-pointer">
+                        <summary class="faq-question bg-purple-900/10 rounded-t p-4 font-bold text-gray-200 group-open:rounded-t-lg group-open:bg-purple-900/30 transition hover:bg-purple-900/20 list-none flex justify-between items-center">
+                            Haverá estacionamento no local?
+                            <span class="transform group-open:rotate-180 transition">▼</span>
+                        </summary>
+                        <div class="faq-answer bg-purple-900/5 p-4 rounded-b border border-t-0 border-purple-900/20"><p class="text-gray-400">O local não possui estacionamento oficial. Recomendamos o uso de aplicativos de transporte ou estacionamentos conveniados nos arredores da Estação Cultura.</p></div>
+                    </details>
+                    <details class="faq-item group cursor-pointer">
+                        <summary class="faq-question bg-purple-900/10 rounded-t p-4 font-bold text-gray-200 group-open:rounded-t-lg group-open:bg-purple-900/30 transition hover:bg-purple-900/20 list-none flex justify-between items-center">
+                            Quem tem direito a meia-entrada?
+                            <span class="transform group-open:rotate-180 transition">▼</span>
+                        </summary>
+                        <div class="faq-answer bg-purple-900/5 p-4 rounded-b border border-t-0 border-purple-900/20"><p class="text-gray-400">Estudantes, idosos, PCDs e jovens de baixa renda (ID Jovem), mediante apresentação de documento comprobatório na entrada do evento.</p></div>
+                    </details>
+                    <details class="faq-item group cursor-pointer">
+                        <summary class="faq-question bg-purple-900/10 rounded-t p-4 font-bold text-gray-200 group-open:rounded-t-lg group-open:bg-purple-900/30 transition hover:bg-purple-900/20 list-none flex justify-between items-center">
+                            O local possui acessibilidade?
+                            <span class="transform group-open:rotate-180 transition">▼</span>
+                        </summary>
+                        <div class="faq-answer bg-purple-900/5 p-4 rounded-b border border-t-0 border-purple-900/20"><p class="text-gray-400">Sim! A Estação Cultura dispõe de rampas de acesso, banheiros adaptados e área reservada próxima ao palco para PCDs.</p></div>
+                    </details>
+                    <details class="faq-item group cursor-pointer">
+                        <summary class="faq-question bg-purple-900/10 rounded-t p-4 font-bold text-gray-200 group-open:rounded-t-lg group-open:bg-purple-900/30 transition hover:bg-purple-900/20 list-none flex justify-between items-center">
+                            Quais as vantagens da área VIP?
+                            <span class="transform group-open:rotate-180 transition">▼</span>
+                        </summary>
+                        <div class="faq-answer bg-purple-900/5 p-4 rounded-b border border-t-0 border-purple-900/20"><p class="text-gray-400">Acesso exclusivo ao Front Stage, bar e banheiros privativos, além de entrada facilitada sem filas.</p></div>
                     </details>
                 </div>
             </section>
@@ -388,9 +525,9 @@
                 <div class="max-w-4xl mx-auto px-6 text-center">
                     <h2 class="text-3xl font-title text-white mb-4">CLUBE 019</h2>
                     <p class="text-gray-300 mb-8">Entre para a lista VIP e receba drops exclusivos, novidades e promoções antes de todo mundo.</p>
-                    <form class="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('Cadastrado com sucesso no universo 019!');">
-                        <input type="email" placeholder="Seu melhor e-mail" class="px-4 py-3 rounded bg-black border border-purple-600 text-white focus:outline-none focus:border-white flex-grow" required>
-                        <button type="submit" class="px-8 py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded transition uppercase tracking-widest">Entrar</button>
+                    <form id="newsletterForm" class="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
+                        <input type="email" placeholder="Seu melhor e-mail" class="px-4 py-3 rounded bg-black border border-purple-600 text-white focus:outline-none focus:border-white focus:ring-2 focus:ring-purple-500 flex-grow transition" required>
+                        <button type="submit" class="px-8 py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded transition uppercase tracking-widest hover:shadow-[0_0_15px_#a400ff]">Entrar</button>
                     </form>
                 </div>
             </section>
@@ -398,7 +535,7 @@
             <!-- Patrocinadores -->
             <section id="sponsors" class="py-20 text-center fade-in">
                 <h3 class="font-title text-xl mb-10 tracking-wider text-gray-400 opacity-50">PATROCÍNIO</h3>
-                <div id="grid-patrocinadores" class="flex justify-center items-center gap-4 md:gap-12 flex-wrap transition">
+                <div id="grid-patrocinadores" class="flex justify-center items-center gap-4 md:gap-12 flex-wrap transition px-4">
                     <!-- Inserido pelo JS -->
                 </div>
             </section>
@@ -406,9 +543,14 @@
         </main>
 
         <!-- Footer -->
-        <footer class="py-8 text-center bg-black border-t border-purple-900/30">
-            <h3 class="text-xl font-title neon-text-white mb-2">Próxima parada: 2026</h3>
-            <p class="text-xs text-gray-600">&copy; 2025-2026 Estação Trap_019.</p>
+        <footer class="py-12 text-center bg-black border-t border-purple-900/30 relative z-10">
+            <h3 class="text-xl font-title neon-text-white mb-4">Próxima parada: 2026</h3>
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="#" class="text-gray-500 hover:text-purple-400 transition">Instagram</a>
+                <a href="#" class="text-gray-500 hover:text-purple-400 transition">Twitter</a>
+                <a href="#" class="text-gray-500 hover:text-purple-400 transition">Tiktok</a>
+            </div>
+            <p class="text-xs text-gray-600">&copy; 2025-2026 Estação Trap_019. Todos os direitos reservados.</p>
         </footer>
 
     </div>
@@ -419,19 +561,12 @@
             <button id="modalCloseBtn" class="modal-close-btn">&times;</button>
             <img id="modalArtistImg" src="" alt="" class="w-32 h-32 rounded-full border-4 border-purple-500 shadow-[0_0_20px_#a400ff] mb-4 object-cover">
             <h3 id="modalArtistName" class="text-3xl font-title text-purple-400 mb-1 drop-shadow-md"></h3>
-            <a id="modalArtistInsta" href="#" target="_blank" class="text-gray-400 text-sm mb-4 hover:text-white transition"></a>
+            <a id="modalArtistInsta" href="#" target="_blank" class="text-gray-400 text-sm mb-4 hover:text-white transition underline decoration-dotted"></a>
             <p id="modalArtistBio" class="text-gray-300 text-sm leading-relaxed mb-6 px-4"></p>
             
-            <!-- Area de Botoes (Atualizada) -->
             <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
-                <a id="modalInstaBtn" href="#" target="_blank" class="instagram-button px-6 py-2 rounded-full w-full sm:w-auto text-sm uppercase tracking-wide shadow-lg flex justify-center">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    Instagram
-                </a>
-                <a id="modalSpotifyBtn" href="#" target="_blank" class="spotify-button px-6 py-2 rounded-full w-full sm:w-auto text-sm uppercase tracking-wide shadow-lg flex justify-center">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.299z"/></svg>
-                    Spotify
-                </a>
+                <a id="modalInstaBtn" href="#" target="_blank" class="instagram-button px-6 py-2 rounded-full w-full sm:w-auto text-sm uppercase tracking-wide shadow-lg flex justify-center">Instagram</a>
+                <a id="modalSpotifyBtn" href="#" target="_blank" class="spotify-button px-6 py-2 rounded-full w-full sm:w-auto text-sm uppercase tracking-wide shadow-lg flex justify-center">Spotify</a>
             </div>
         </div>
     </div>
@@ -440,25 +575,31 @@
     <div id="sponsorModal" class="modal-overlay">
         <div class="modal-content relative flex flex-col items-center max-w-lg w-full">
             <button id="sponsorModalCloseBtn" class="modal-close-btn">&times;</button>
-            
-            <!-- Imagem do Modal Arredondada e com Borda -->
             <img id="modalSponsorLogo" src="" alt="" class="w-24 h-24 rounded-full border-4 border-purple-500 shadow-[0_0_20px_#a400ff] mb-4 object-cover">
-            
             <h3 id="modalSponsorName" class="text-2xl font-title text-purple-400 mb-2 drop-shadow-md"></h3>
             <p id="modalSponsorDesc" class="text-gray-300 text-sm text-center mb-6 px-4 leading-relaxed"></p>
-            
             <div id="modalSponsorGallery" class="grid grid-cols-2 gap-2 w-full mb-6"></div>
+            <a id="modalSponsorInsta" href="#" target="_blank" class="instagram-button px-6 py-2 rounded-full w-full max-w-[200px] text-sm uppercase tracking-wide shadow-lg flex justify-center">Ver no Instagram</a>
+        </div>
+    </div>
 
-            <a id="modalSponsorInsta" href="#" target="_blank" class="instagram-button px-6 py-2 rounded-full w-full max-w-[200px] text-sm uppercase tracking-wide shadow-lg flex justify-center">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                Ver no Instagram
-            </a>
+    <!-- MODAL HACKER (EASTER EGG) -->
+    <div id="hackerModal" class="modal-overlay">
+        <div class="modal-content relative flex flex-col items-center border border-green-500 shadow-[0_0_50px_#00ff00]" style="background-color: black; color: #00ff00; font-family: 'Share Tech Mono', monospace;">
+            <button class="modal-close-btn text-green-500 hover:text-white" onclick="toggleHackerMode()">&times;</button>
+            <h2 class="text-4xl font-bold mb-4 animate-pulse">SISTEMA INVADIDO</h2>
+            <p class="text-lg mb-6 text-left w-full border-l-2 border-green-500 pl-4">
+                > Acesso concedido: Nível Admin <br>
+                > Protocolo 019 ativado... <br><br>
+                "Nós não seguimos tendências. Nós criamos a frequência. Bem-vindo ao verdadeiro underground."
+            </p>
+            <button onclick="toggleHackerMode()" class="border border-green-500 px-6 py-2 text-green-500 hover:bg-green-500 hover:text-black transition uppercase font-bold tracking-widest">Encerrar Sessão</button>
         </div>
     </div>
 
     <!-- Botão WhatsApp -->
-    <a href="https://wa.me/5519999999999" target="_blank" class="fixed bottom-6 right-6 z-50 hover:scale-110 transition duration-300">
-        <div class="bg-green-600 p-3 rounded-full shadow-[0_0_20px_rgba(22,163,74,0.6)] border border-white/20">
+    <a href="https://wa.me/5519999999999" target="_blank" class="fixed bottom-6 right-6 z-50 hover:scale-110 transition duration-300 group" title="Fale Conosco">
+        <div class="bg-green-600 p-3 rounded-full shadow-[0_0_20px_rgba(22,163,74,0.6)] border border-white/20 group-hover:shadow-[0_0_30px_rgba(22,163,74,0.9)]">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
         </div>
     </a>
@@ -468,6 +609,76 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
+            // --- UI: Scroll to Top Logic ---
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+                highlightNavLink(); // Verifica qual seção está ativa
+            });
+
+            // --- UI: Active Nav Link Highlight ---
+            function highlightNavLink() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollY >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // --- UI: Newsletter Toast ---
+            const newsletterForm = document.getElementById('newsletterForm');
+            if(newsletterForm) {
+                newsletterForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    // Simular envio
+                    const btn = newsletterForm.querySelector('button');
+                    const originalText = btn.innerText;
+                    btn.innerText = "Enviando...";
+                    btn.disabled = true;
+                    
+                    setTimeout(() => {
+                        showToast('Cadastrado no universo 019!', '🚀');
+                        newsletterForm.reset();
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                    }, 1500);
+                });
+            }
+
+            // --- TOAST FUNCTION ---
+            window.showToast = (message, icon = '✅') => {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.innerHTML = `<span class="toast-icon">${icon}</span> ${message}`;
+                container.appendChild(toast);
+                
+                // Trigger reflow
+                void toast.offsetWidth; 
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => toast.remove(), 400);
+                }, 3000);
+            };
+
             // --- Countdown ---
             const eventDate = new Date("November 20, 2026 16:00:00").getTime();
             setInterval(() => {
@@ -486,7 +697,7 @@
                 slides[currentSlide].classList.remove('active');
                 currentSlide = (currentSlide + 1) % slides.length;
                 slides[currentSlide].classList.add('active');
-            }, 4000);
+            }, 5000); // Aumentei um pouco o tempo
 
             // --- Scroll Animation ---
             const observer = new IntersectionObserver((entries) => {
@@ -496,28 +707,30 @@
 
             // --- Mobile Menu ---
             const menuBtn = document.getElementById('mobile-menu-button'), mobileMenu = document.getElementById('mobile-menu');
-            if(menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            if(menuBtn) menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
 
             // --- Map ---
             const map = L.map('map', { scrollWheelZoom: false }).setView([-22.9099, -47.0626], 16);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OSM' }).addTo(map);
             const neonIcon = L.divIcon({ className: 'custom', html: "<div style='background-color:#a400ff;width:15px;height:15px;border-radius:50%;box-shadow:0 0 10px #fff, 0 0 20px #a400ff;'></div>" });
-            L.marker([-22.9099, -47.0626], {icon: neonIcon}).addTo(map).bindPopup("<b>Estação Trap_019</b>").openPopup();
+            L.marker([-22.9099, -47.0626], {icon: neonIcon}).addTo(map).bindPopup("<b>Estação Trap_019</b><br>Ponto de Encontro").openPopup();
 
             // --- DADOS DOS ARTISTAS ---
             const artists = [
-                { id: 'mnar', name: 'Mnar', handle: '@mnar', img: 'https://i.postimg.cc/8CQRLLxT/mnar-lp.jpg', bio: 'Energia caótica.', spotify: '#' },
-                { id: 'cabarajo', name: 'Cabarajo', handle: '@cabarajo', img: 'https://i.postimg.cc/1zsg9BLH/caba-lp.jpg', bio: 'Trap regional.', spotify: '#' },
-                { id: 'dgr', name: 'DGR', handle: '@dgr', img: 'https://i.postimg.cc/Bvbjx5qf/dgr-lp.jpg', bio: 'Sad trap.', spotify: '#' },
-                { id: 'omg', name: 'OMG Gang', handle: '@omggang', img: 'https://i.postimg.cc/hGTHZ64b/omg-gang-lp.jpg', bio: 'Coletivo pesado.', spotify: '#' },
-                { id: 'yuri', name: 'Dj Yuri', handle: '@yuridimc', img: 'https://i.postimg.cc/HkxYKpFZ/dj-yuri-dimc-lp.jpg', bio: 'Funk 150BPM.', spotify: '#' },
-                { id: 'agos', name: 'Os Agôs', handle: '@osagos', img: 'https://i.postimg.cc/HkPKmvJN/agos-lp.jpg', bio: 'Ancestralidade.', spotify: '#' },
-                { id: 'bs', name: 'Bs Little', handle: '@bslittle', img: 'https://i.postimg.cc/xTLMnXXQ/bs-lp.jpg', bio: 'Plug star.', spotify: '#' },
-                { id: 'yke', name: 'YKE', handle: '@yke', img: 'https://i.postimg.cc/Pr52qzkL/yke-lp.jpg', bio: 'Graffiti sound.', spotify: '#' },
-                { id: 'mdg', name: 'MDG', handle: '@mdg', img: 'https://i.postimg.cc/tCsv5tvh/mdg-lp.jpg', bio: 'Voz da 019.', spotify: '#' },
-                { id: 'qlq', name: 'Qualquepa', handle: '@qualquepa', img: 'https://i.postimg.cc/Bt9yrjX8/qlqpa-img.png', bio: 'Cloud rap.', spotify: '#' },
+                { id: 'mnar', name: 'Mnar', handle: '@mnar', img: 'https://i.postimg.cc/8CQRLLxT/mnar-lp.jpg', bio: 'Energia caótica e rimas rápidas. Um dos pilares do trap campineiro.', spotify: '#' },
+                { id: 'cabarajo', name: 'Cabarajo', handle: '@cabarajo', img: 'https://i.postimg.cc/1zsg9BLH/caba-lp.jpg', bio: 'Trap regional com influências de funk e soul.', spotify: '#' },
+                { id: 'dgr', name: 'DGR', handle: '@dgr', img: 'https://i.postimg.cc/Bvbjx5qf/dgr-lp.jpg', bio: 'O rei do Sad Trap na região 019.', spotify: '#' },
+                { id: 'omg', name: 'OMG Gang', handle: '@omggang', img: 'https://i.postimg.cc/hGTHZ64b/omg-gang-lp.jpg', bio: 'Coletivo pesado que traz a vivência das ruas para o palco.', spotify: '#' },
+                { id: 'yuri', name: 'Dj Yuri', handle: '@yuridimc', img: 'https://i.postimg.cc/HkxYKpFZ/dj-yuri-dimc-lp.jpg', bio: 'O melhor do Funk 150BPM misturado com beats de trap.', spotify: '#' },
+                { id: 'agos', name: 'Os Agôs', handle: '@osagos', img: 'https://i.postimg.cc/HkPKmvJN/agos-lp.jpg', bio: 'Ancestralidade e batidas futuristas.', spotify: '#' },
+                { id: 'bs', name: 'Bs Little', handle: '@bslittle', img: 'https://i.postimg.cc/xTLMnXXQ/bs-lp.jpg', bio: 'Plug star em ascensão.', spotify: '#' },
+                { id: 'yke', name: 'YKE', handle: '@yke', img: 'https://i.postimg.cc/Pr52qzkL/yke-lp.jpg', bio: 'Visual e sonoro. Graffiti sound.', spotify: '#' },
+                { id: 'mdg', name: 'MDG', handle: '@mdg', img: 'https://i.postimg.cc/tCsv5tvh/mdg-lp.jpg', bio: 'A voz marcante da 019.', spotify: '#' },
+                { id: 'qlq', name: 'Qualquepa', handle: '@qualquepa', img: 'https://i.postimg.cc/Bt9yrjX8/qlqpa-img.png', bio: 'Cloud rap atmosférico.', spotify: '#' },
                 { id: 'samuka', name: 'Samukaplug', handle: '@samukaplug', img: 'https://i.postimg.cc/1t4Yhdsq/samukaplug-lp.jpg', bio: 'Melodic plug.', spotify: '#' },
-                { id: 'mina', name: 'Mina Criis', handle: '@minacriis', img: 'https://i.postimg.cc/bYB3sSYy/minacriis-lp.jpg', bio: 'R&B Queen.', spotify: '#' },
+                { id: 'mina', name: 'Mina Criis', handle: '@minacriis', img: 'https://i.postimg.cc/bYB3sSYy/minacriis-lp.jpg', bio: 'R&B Queen com flow de trap.', spotify: '#' },
                 { id: 'a13', name: 'Jerbs', handle: '@jerbs', img: 'https://placehold.co/100/9300e6/000?text=J', bio: 'R&B e Trap.', spotify: '#' },
                 { id: 'a14', name: 'DJ Vitu', handle: '@djvitu', img: 'https://placehold.co/100/7a00ff/000?text=V', bio: 'Underground Hits.', spotify: '#' },
                 { id: 'a15', name: 'Fábrica 808', handle: '@fabrica808', img: 'https://i.postimg.cc/15RsnmmT/fabrica-808-l.jpg', bio: 'Beatmakers.', spotify: '#' },
@@ -537,9 +750,11 @@
             const gridArtistas = document.getElementById('grid-artistas');
             if(gridArtistas) {
                 gridArtistas.innerHTML = artists.map((a, index) => `
-                    <div class="artist-card min-w-[160px] w-[45%] md:w-auto snap-center md:snap-align-none flex-shrink-0 md:flex-shrink" data-delay="${index * 50}">
-                        <img src="${a.img}" alt="${a.name}" loading="lazy">
-                        <h4 class="font-title text-white">${a.name}</h4>
+                    <div class="artist-card min-w-[160px] w-[45%] md:w-auto snap-center md:snap-align-none flex-shrink-0 md:flex-shrink group" data-delay="${index * 50}">
+                        <div class="overflow-hidden rounded-full w-[100px] h-[100px] mx-auto mb-3 border-2 border-purple-600 group-hover:border-purple-400 transition-colors">
+                            <img src="${a.img}" alt="${a.name}" loading="lazy" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="font-title text-white group-hover:text-purple-300 transition-colors">${a.name}</h4>
                         <p class="text-xs text-gray-500 mb-2">${a.handle}</p>
                         <button class="open-modal-btn" onclick="openArtistModal('${a.id}')">🛸 Ver Bio</button>
                     </div>
@@ -585,7 +800,7 @@
             const gridSponsors = document.getElementById('grid-patrocinadores');
             if(gridSponsors) {
                 gridSponsors.innerHTML = sponsors.map(s => `
-                    <div class="cursor-pointer transition transform hover:scale-110 p-2" onclick="openSponsorModal('${s.id}')">
+                    <div class="cursor-pointer transition transform hover:scale-110 p-2" onclick="openSponsorModal('${s.id}')" title="Ver Detalhes">
                         <img src="${s.logo}" alt="${s.name}" class="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-purple-500 object-cover shadow-[0_0_15px_#a400ff] hover:shadow-[0_0_25px_#f000ff] transition-all duration-300">
                     </div>
                 `).join('');
@@ -602,7 +817,6 @@
                 document.getElementById('modalArtistInsta').href = `https://instagram.com/${artist.handle.replace('@','')}`;
                 document.getElementById('modalArtistBio').textContent = artist.bio;
                 
-                // Links dos Botoes
                 document.getElementById('modalInstaBtn').href = `https://instagram.com/${artist.handle.replace('@','')}`;
                 document.getElementById('modalSpotifyBtn').href = artist.spotify;
 
@@ -620,7 +834,6 @@
                 document.getElementById('modalSponsorDesc').textContent = sponsor.desc;
                 document.getElementById('modalSponsorInsta').href = sponsor.insta;
                 
-                // Preencher Galeria
                 const galleryContainer = document.getElementById('modalSponsorGallery');
                 galleryContainer.innerHTML = sponsor.gallery.map(img => `
                     <img src="${img}" class="rounded-lg border border-purple-500/20 w-full h-32 object-cover">
@@ -634,6 +847,7 @@
             const closeModals = () => {
                 modalArtist.classList.remove('open');
                 modalSponsor.classList.remove('open');
+                document.getElementById('hackerModal').classList.remove('open');
                 document.body.style.overflow = '';
             };
 
@@ -642,8 +856,82 @@
                 if(e.target === overlay) closeModals();
             }));
             document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModals(); });
-
         });
+
+        // ============================================
+        // LÓGICA DAS NOVAS FUNCIONALIDADES IMERSIVAS
+        // ============================================
+
+        // --- 1. O ORÁCULO DO TRAP ---
+        const oracleVerses = [
+            { text: "O topo é alto, mas a vista é bela. Quem não corre, não vê a janela.", artist: "Mnar" },
+            { text: "Foguete não tem ré, e meu sonho não tem freio.", artist: "Cabarajo" },
+            { text: "Dinheiro vai, dinheiro vem, mas a postura ninguém compra.", artist: "DGR" },
+            { text: "Antes de brilhar no palco, brilhe na sua quebrada.", artist: "MDG" },
+            { text: "O silêncio do sábio vale mais que o grito do tolo.", artist: "YKE" },
+            { text: "Vivendo avançado, pensando no futuro, agindo no presente.", artist: "Qualquepa" },
+            { text: "A rua cobra, mas também ensina quem sabe ouvir.", artist: "DJ Vitu" },
+            { text: "Não espere o universo trazer, vá buscar a sua galáxia.", artist: "Profecia 019" }
+        ];
+
+        function revealFate() {
+            const resultBox = document.getElementById('oracleResult');
+            const core = document.getElementById('oracleCore');
+            const textElem = document.getElementById('oracleText');
+            const artistElem = document.getElementById('oracleArtist');
+            
+            // Shake effect visual
+            core.classList.add('shake-active');
+            setTimeout(() => core.classList.remove('shake-active'), 500);
+
+            resultBox.classList.add('hidden');
+            resultBox.classList.remove('opacity-100', 'translate-y-0');
+            
+            setTimeout(() => {
+                const randomFate = oracleVerses[Math.floor(Math.random() * oracleVerses.length)];
+                textElem.innerText = randomFate.text;
+                artistElem.innerText = "- " + randomFate.artist;
+                
+                resultBox.classList.remove('hidden');
+                setTimeout(() => {
+                    resultBox.classList.add('opacity-100', 'translate-y-0');
+                    showToast('Visão recebida.', '🔮');
+                }, 50);
+            }, 500); // Demora um pouco mais pelo efeito de shake
+        }
+
+        // --- 3. MODO HACKER (EASTER EGG) ---
+        let logoClicks = 0;
+        const brandLogo = document.getElementById('brand-logo');
+        const hackerModal = document.getElementById('hackerModal');
+
+        if(brandLogo) {
+            brandLogo.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                logoClicks++;
+                
+                // Feedback visual sutil no clique
+                brandLogo.style.textShadow = "0 0 10px red";
+                setTimeout(() => brandLogo.style.textShadow = "", 200);
+
+                if (logoClicks === 5) {
+                    toggleHackerMode();
+                    logoClicks = 0; 
+                }
+            });
+        }
+
+        function toggleHackerMode() {
+            document.body.classList.toggle('hacker-mode');
+            const isHacker = document.body.classList.contains('hacker-mode');
+            
+            if (isHacker) {
+                hackerModal.classList.add('open');
+                showToast('SYSTEM BREACH DETECTED', '💀');
+            } else {
+                hackerModal.classList.remove('open');
+            }
+        }
     </script>
 </body>
 </html>
