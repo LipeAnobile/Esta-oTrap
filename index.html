@@ -78,7 +78,7 @@
         /* Tipografia */
         h1, h2, h3, .font-title { font-family: var(--font-title); text-transform: uppercase; }
         h1 { font-size: 3.5rem; }
-        @media (max-width: 768px) { h1 { font-size: 2.0rem; } } /* Ajuste responsivo para título */
+        @media (max-width: 768px) { h1 { font-size: 2.0rem; } }
 
         /* Neon & Efeitos */
         .neon-text {
@@ -153,91 +153,65 @@
         }
         .glitch-title { position: relative; animation: glitch 500ms infinite; }
 
-        /* Logo Img - Responsivo */
-        .logo-img {
-            width: 300px;
-            max-width: 80vw; /* Garante que não estoure a tela no mobile */
-            height: auto; 
-            margin: 0 0 2rem 0;
-            display: inline-block;
+        /* Hero Cover (Wallpaper) */
+        .hero-cover-container {
+            width: 100%;
+            height: 45vh; /* Altura da capa */
+            min-height: 300px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            /* Máscara para suavizar a borda inferior */
+            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+        }
+        
+        .hero-cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.8) contrast(1.1); /* Ajuste visual */
         }
 
-        /* Carousel Banners - Responsivo */
+        /* Carousel Banners */
         .banner-carousel {
-            position: relative; 
-            width: 100%; 
-            max-width: 1000px;
-            /* Altura dinâmica: menor no mobile, maior no desktop */
-            height: 200px; 
-            margin: 2rem auto; 
-            overflow: hidden; 
-            border-radius: 8px;
-            border: 1px solid rgba(164, 0, 255, 0.3);
+            position: relative; width: 100%; max-width: 1000px; height: 200px; margin: 2rem auto; overflow: hidden; border-radius: 8px; border: 1px solid rgba(164, 0, 255, 0.3);
         }
-        @media (min-width: 768px) {
-            .banner-carousel { height: 350px; } /* Altura desktop */
-        }
-
+        @media (min-width: 768px) { .banner-carousel { height: 350px; } }
         .banner-slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; transition: opacity 1s ease-in-out;
-            display: flex; align-items: center; justify-content: center;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; align-items: center; justify-content: center;
         }
         .banner-slide.active { opacity: 1; }
         .banner-content {
-            background: rgba(0,0,0,0.6); padding: 10px 20px; border-radius: 4px;
-            border: 1px solid var(--color-purple-neon);
-            position: relative; z-index: 10;
+            background: rgba(0,0,0,0.6); padding: 10px 20px; border-radius: 4px; border: 1px solid var(--color-purple-neon); position: relative; z-index: 10;
         }
 
-        /* Cards & Modal */
+        /* Cards */
         .artist-card {
-            background-color: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(164, 0, 255, 0.2); 
-            padding: 1rem; 
-            text-align: center; 
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
-            /* Impede que o card encolha no flex (mobile) */
-            flex-shrink: 0; 
+            background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(164, 0, 255, 0.2); padding: 1rem; text-align: center; border-radius: 0.5rem; transition: all 0.3s ease; flex-shrink: 0;
         }
         .artist-card:hover { transform: translateY(-8px); background-color: rgba(164, 0, 255, 0.05); border-color: var(--color-purple-neon); }
         .artist-card img {
-            width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--color-purple-neon); margin: 0 auto 0.75rem auto;
-            transition: all 0.3s ease; filter: grayscale(30%);
+            width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-purple-neon); margin: 0 auto 0.75rem auto; transition: all 0.3s ease; filter: grayscale(30%);
         }
         .artist-card:hover img { filter: grayscale(0%); box-shadow: 0 0 15px var(--color-purple-neon); }
         
-        /* Utilitário para esconder scrollbar mas manter funcionalidade */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
         .open-modal-btn {
-            font-family: var(--font-text); font-size: 0.75rem; font-weight: 600;
-            color: var(--color-purple-neon); background: transparent; border: 1px solid var(--color-purple-neon);
-            padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-top: 0.75rem; cursor: pointer; transition: all 0.3s ease;
+            font-family: var(--font-text); font-size: 0.75rem; font-weight: 600; color: var(--color-purple-neon); background: transparent; border: 1px solid var(--color-purple-neon); padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-top: 0.75rem; cursor: pointer; transition: all 0.3s ease;
         }
         .open-modal-btn:hover { background: var(--color-purple-neon); color: var(--color-bg); }
 
         /* Modais */
         .modal-overlay {
-            position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
-            z-index: 100; display: flex; align-items: center; justify-content: center;
-            opacity: 0; visibility: hidden; transition: all 0.3s ease;
+            position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease;
         }
         .modal-overlay.open { opacity: 1; visibility: visible; }
         .modal-content {
-            background-color: #0b0b0f; background-image: url(https://www.transparenttextures.com/patterns/noise.png);
-            color: #e5e5e5; border-radius: 1rem; padding: 2.5rem; width: 90%; max-width: 450px;
-            border: 1px solid #9c3cff; box-shadow: 0 0 30px rgba(156, 60, 255, 0.3); position: relative;
-            transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-align: center;
+            background-color: #0b0b0f; background-image: url(https://www.transparenttextures.com/patterns/noise.png); color: #e5e5e5; border-radius: 1rem; padding: 2.5rem; width: 90%; max-width: 450px; border: 1px solid #9c3cff; box-shadow: 0 0 30px rgba(156, 60, 255, 0.3); position: relative; transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center;
         }
         .modal-overlay.open .modal-content { transform: scale(1); }
         .modal-close-btn { position: absolute; top: 1rem; right: 1rem; color: #aaa; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; }
@@ -248,12 +222,8 @@
         .fade-in-visible { opacity: 1; transform: translateY(0); }
         
         /* Ajuste do Mapa */
-        #map { 
-            height: 300px; /* Altura padrão */
-            width: 100%; border-radius: 0.5rem; border: 2px solid var(--color-purple-neon); box-shadow: 0 0 15px var(--color-purple-neon); z-index: 10; 
-        }
+        #map { height: 300px; width: 100%; border-radius: 0.5rem; border: 2px solid var(--color-purple-neon); box-shadow: 0 0 15px var(--color-purple-neon); z-index: 10; }
         @media (min-width: 768px) { #map { height: 400px; } }
-        
         .leaflet-container { background: #000 !important; }
         .leaflet-tile { filter: grayscale(100%) invert(100%) hue-rotate(240deg) brightness(0.8) contrast(1.2) !important; }
     </style>
@@ -287,13 +257,16 @@
     <!-- Fundo Estrelado -->
     <div class="stars"><div class="stars-bg"></div></div>
 
-    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- CAPA DO EVENTO (WALLPAPER) -->
+    <!-- Inserido antes do container principal para ocupar largura total -->
+    <div class="hero-cover-container mt-16">
+        <img src="https://i.postimg.cc/tgsPWwBp/Sem-Titulo-24.jpg" alt="Capa Estação Trap" class="hero-cover-img">
+    </div>
 
-        <!-- Header / Hero -->
-        <header id="home" class="min-h-screen flex flex-col items-center justify-center text-center pt-24 pb-12">
-            
-            <!-- LOGO GRANDE -->
-            <img src="https://i.postimg.cc/pVqTVpX4/IMG-59601-ezgif-com-video-to-gif-converter.gif" alt="Logo Animado Estação Trap_019" class="logo-img">
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20"> <!-- Margem negativa para subir o conteúdo sobre o gradiente -->
+
+        <!-- Header Text -->
+        <header id="home" class="flex flex-col items-center justify-center text-center pb-12">
             
             <h1 class="font-title neon-text-white mb-2 tracking-widest glitch-title" data-text="Estação Trap_019">Estação Trap_019</h1>
             <p class="text-lg md:text-xl text-gray-300 mb-6 max-w-lg mx-auto"><span class="neon-text font-semibold">★</span> O evento que conecta o underground ao universo.</p>
@@ -306,19 +279,16 @@
                 <div class="text-center bg-black/50 border border-purple-600 p-2 rounded min-w-[70px]"><span id="seconds" class="block text-2xl font-title text-white">00</span><span class="text-[10px] text-purple-400 uppercase">Seg</span></div>
             </div>
 
-            <!-- BANNERS ROTATIVOS (Agora maior) -->
+            <!-- BANNERS ROTATIVOS -->
             <div class="banner-carousel fade-in shadow-lg shadow-purple-900/20">
-                <!-- Slide 1 -->
                 <div class="banner-slide active">
                     <img src="https://placehold.co/1000x350/1a0329/a400ff?text=Ingressos+Lote+Virada" alt="Ingressos" class="absolute inset-0 w-full h-full object-cover">
                     <div class="banner-content"><h3 class="font-title text-white text-xl">Garanta seu ingresso</h3></div>
                 </div>
-                <!-- Slide 2 -->
                 <div class="banner-slide">
                     <img src="https://placehold.co/1000x350/29031a/f000ff?text=Camisetas+Oficiais" alt="Camisetas" class="absolute inset-0 w-full h-full object-cover">
                     <div class="banner-content"><h3 class="font-title text-white text-xl">Merch Exclusivo</h3></div>
                 </div>
-                <!-- Slide 3 -->
                 <div class="banner-slide">
                     <img src="https://placehold.co/1000x350/030f29/00ffff?text=Patrocínio+Callidus" alt="Callidus" class="absolute inset-0 w-full h-full object-cover">
                     <div class="banner-content"><h3 class="font-title text-white text-xl">Apoio: Callidus</h3></div>
@@ -373,19 +343,14 @@
 
             <div class="neon-divider fade-in"></div>
 
-            <!-- Line-up (Agora RESPONSIVO COM SCROLL) -->
+            <!-- Line-up -->
             <section id="lineup" class="py-20 fade-in">
                 <div class="text-center mb-12">
                     <span class="text-purple-400 font-title tracking-[0.3em] text-sm border border-purple-600 px-3 py-1 rounded-full">LINE-UP</span>
                     <h2 class="text-3xl md:text-4xl font-title mt-4 neon-text-white">26 ARTISTAS CONFIRMADOS</h2>
                 </div>
                 
-                <!-- 
-                    Container do Grid modificado:
-                    - flex no mobile (permite scroll horizontal)
-                    - grid no desktop (md:grid)
-                    - snap-x para o efeito de travar no card
-                -->
+                <!-- Grid de Artistas - Responsivo (Esteira no mobile) -->
                 <div id="grid-artistas" class="flex overflow-x-auto snap-x snap-mandatory gap-4 py-4 px-4 md:px-0 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:gap-6 scrollbar-hide">
                     <!-- Cards gerados via JS -->
                 </div>
@@ -435,7 +400,7 @@
             <!-- Patrocinadores -->
             <section id="sponsors" class="py-20 text-center fade-in">
                 <h3 class="font-title text-xl mb-10 tracking-wider text-gray-400 opacity-50">PATROCÍNIO</h3>
-                <div id="grid-patrocinadores" class="flex justify-center items-center gap-12 flex-wrap transition">
+                <div id="grid-patrocinadores" class="flex justify-center items-center gap-4 md:gap-12 flex-wrap transition">
                     <!-- Inserido pelo JS -->
                 </div>
             </section>
@@ -458,10 +423,18 @@
             <h3 id="modalArtistName" class="text-3xl font-title text-purple-400 mb-1 drop-shadow-md"></h3>
             <a id="modalArtistInsta" href="#" target="_blank" class="text-gray-400 text-sm mb-4 hover:text-white transition"></a>
             <p id="modalArtistBio" class="text-gray-300 text-sm leading-relaxed mb-6 px-4"></p>
-            <a id="modalSpotifyBtn" href="#" target="_blank" class="spotify-button px-6 py-2 rounded-full w-full max-w-[200px] text-sm uppercase tracking-wide shadow-lg">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.299z"/></svg>
-                Ouvir no Spotify
-            </a>
+            
+            <!-- Area de Botoes (Atualizada) -->
+            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+                <a id="modalInstaBtn" href="#" target="_blank" class="instagram-button px-6 py-2 rounded-full w-full sm:w-auto text-sm uppercase tracking-wide shadow-lg flex justify-center">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    Instagram
+                </a>
+                <a id="modalSpotifyBtn" href="#" target="_blank" class="spotify-button px-6 py-2 rounded-full w-full sm:w-auto text-sm uppercase tracking-wide shadow-lg flex justify-center">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.299z"/></svg>
+                    Spotify
+                </a>
+            </div>
         </div>
     </div>
 
@@ -473,7 +446,7 @@
             <h3 id="modalSponsorName" class="text-2xl font-title text-purple-400 mb-2 drop-shadow-md"></h3>
             <p id="modalSponsorDesc" class="text-gray-300 text-sm text-center mb-6 px-4 leading-relaxed"></p>
             <div id="modalSponsorGallery" class="grid grid-cols-2 gap-2 w-full mb-6"></div>
-            <a id="modalSponsorInsta" href="#" target="_blank" class="instagram-button px-6 py-2 rounded-full w-full max-w-[200px] text-sm uppercase tracking-wide shadow-lg">
+            <a id="modalSponsorInsta" href="#" target="_blank" class="instagram-button px-6 py-2 rounded-full w-full max-w-[200px] text-sm uppercase tracking-wide shadow-lg flex justify-center">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 Ver no Instagram
             </a>
@@ -573,6 +546,14 @@
             // --- DADOS DOS PATROCINADORES ---
             const sponsors = [
                 { 
+                    id: 'vereadora', 
+                    name: 'Vereadora', 
+                    logo: 'https://placehold.co/150x150/000/fff?text=Vereadora',
+                    desc: 'Apoiando a cultura e a juventude da nossa cidade.',
+                    gallery: ['https://placehold.co/200x200/222/fff?text=Projeto+Social', 'https://placehold.co/200x200/222/fff?text=Comunidade'],
+                    insta: 'https://instagram.com/vereadora'
+                },
+                { 
                     id: 'callidus', 
                     name: 'Callidus', 
                     logo: 'https://placehold.co/150x150/000/fff?text=Callidus',
@@ -602,7 +583,7 @@
             if(gridSponsors) {
                 gridSponsors.innerHTML = sponsors.map(s => `
                     <div class="cursor-pointer transition transform hover:scale-110 p-2" onclick="openSponsorModal('${s.id}')">
-                        <img src="${s.logo}" alt="${s.name}" class="w-24 h-24 rounded-full border-2 border-purple-500 object-cover shadow-[0_0_15px_#a400ff] hover:shadow-[0_0_25px_#f000ff] transition-all duration-300">
+                        <img src="${s.logo}" alt="${s.name}" class="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-purple-500 object-cover shadow-[0_0_15px_#a400ff] hover:shadow-[0_0_25px_#f000ff] transition-all duration-300">
                     </div>
                 `).join('');
             }
@@ -617,7 +598,11 @@
                 document.getElementById('modalArtistInsta').textContent = artist.handle;
                 document.getElementById('modalArtistInsta').href = `https://instagram.com/${artist.handle.replace('@','')}`;
                 document.getElementById('modalArtistBio').textContent = artist.bio;
+                
+                // Links dos Botoes
+                document.getElementById('modalInstaBtn').href = `https://instagram.com/${artist.handle.replace('@','')}`;
                 document.getElementById('modalSpotifyBtn').href = artist.spotify;
+
                 modalArtist.classList.add('open');
                 document.body.style.overflow = 'hidden';
             };
